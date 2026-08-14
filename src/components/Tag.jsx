@@ -38,7 +38,7 @@ const Tag=()=>
                 loading?(<Spinner/>):(<img src={gif} alt="Random GIF" className="max-h-[280px] max-w-full rounded-lg object-contain shadow-md" />)
               }
               </div>
-              <input type="text" placeholder="Enter a tag" className="w-full rounded-xl border border-transparent bg-white px-4 py-3 font-medium text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-blue-900 focus:ring-4 focus:ring-white/50 sm:w-10/12" onChange={changehandler} />
+              <input type="text" placeholder="Enter a tag" className="w-full rounded-xl border border-transparent bg-white px-4 py-3 font-medium text-slate-900 outline-none transition placeholder:text-slate-500 focus:border-blue-900 focus:ring-4 focus:ring-white/50 sm:w-10/12" onChange={changehandler} value={tag}/>
               <button onClick={clickhandler} className="w-full rounded-xl bg-white px-4 py-3 font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-4 focus:ring-white/50 active:translate-y-0 sm:w-10/12">Generate</button>
             </div>
         </section>
@@ -46,3 +46,4 @@ const Tag=()=>
 }
 export default Tag;
 // output.data.data.images.original.url is path to fetch the particular gif in console
+//the code written above the return must be less so we must use the custom hooks for that
