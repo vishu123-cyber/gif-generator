@@ -1,21 +1,32 @@
-import react from react;
-const usegif=()=>{
-    const[gif,setGif]=React.useState();
-    const[loading,setloading]=React.useState(false);
-    const randomurl='https://api.giphy.com/v1/gifs/random?api_key=kXYaX7wCACsfNka4VQudYPbSUeQ7V6bp';
-    const tagurl='https://api.giphy.com/v1/gifs/random?api_key=kXYaX7wCACsfNka4VQudYPbSUeQ7V6bp&tag=${encodeURIComponent(tag)}';
-     
-    async function fetchdata(tag)
-    {
-        setloading(true);
-        const output=await axios.get(tag?tagurl:randomurl);
-        console.log(output);
-        setGif(output.data.data.images.original.url);
-        setloading(false);
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+
+const useGif = () => {
+  const [gif, setGif] = useState("");
+  const [loading, setLoading] = useState(false);
+  const randomUrl = "https://api.giphy.com/v1/gifs/random?api_key=kXYaX7wCACsfNka4VQudYPbSUeQ7V6bp";
+
+  const fetchData = useCallback(async (tag = "") => {
+    setLoading(true);
+
+    try {
+      const url = tag.trim()
+        ? `${randomUrl}&tag=${encodeURIComponent(tag)}`
+        : randomUrl;
+      const output = await axios.get(url);
+      setGif(output.data.data.images.original.url);
+    } catch (error) {
+      console.error("Unable to fetch a GIF:", error);
+    } finally {
+      setLoading(false);
     }
-    React.useEffect(()=>
-    {
-        fetchdata();
-    },[])
-}
-//if tag is true then tagurl else randomurl
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { gif, loading, fetchData };
+};
+
+export default useGif;

@@ -1,29 +1,29 @@
-import axios from "axios";
-import React from "react";
 import Spinner from "./Spinner";
+import useGif from "../hooks/Usegif";
 const Random=()=>
 {
-    const[gif,setGif]=React.useState("");
-    const[loading,setloading]=React.useState(false);
-    const url='https://api.giphy.com/v1/gifs/random?api_key=kXYaX7wCACsfNka4VQudYPbSUeQ7V6bp';
+    // const[gif,setGif]=React.useState("");
+    // const[loading,setloading]=React.useState(false);
+    // const url='https://api.giphy.com/v1/gifs/random?api_key=kXYaX7wCACsfNka4VQudYPbSUeQ7V6bp';
      
-    async function fetchdata()
+    // async function fetchdata()
+    // {
+    //     setloading(true);
+    //     const output=await axios.get(url);
+    //     console.log(output);
+    //     setGif(output.data.data.images.original.url);
+    //     setloading(false);
+    // }
+      
+    // React.useEffect(()=>
+    // {
+    //     fetchdata();
+    // },[])
+    const{gif,loading,fetchData}=useGif();
+  function clickhandler()
     {
-        setloading(true);
-        const output=await axios.get(url);
-        console.log(output);
-        setGif(output.data.data.images.original.url);
-        setloading(false);
+       fetchData();
     }
-      function clickhandler()
-    {
-       fetchdata();
-    }
-    React.useEffect(()=>
-    {
-        fetchdata();
-    },[])
-  
     return(
      <section className="w-full overflow-hidden rounded-2xl border border-emerald-700/20 bg-emerald-500 p-4 shadow-xl shadow-emerald-900/15 sm:p-6">
             <div className="flex min-h-[26rem] flex-col items-center gap-5">

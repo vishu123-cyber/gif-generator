@@ -1,33 +1,39 @@
-import axios from "axios";
 import React from "react";
 import Spinner from "./Spinner";
+import useGif from "../hooks/Usegif";
 const Tag=()=>
 {
-    const[gif,setGif]=React.useState("");
-    const[loading,setloading]=React.useState(false);
-    const[tag,setTag]=React.useState("");
-    const url='https://api.giphy.com/v1/gifs/random?api_key=kXYaX7wCACsfNka4VQudYPbSUeQ7V6bp&tag=${encodeURIComponent(tag)}';
+   const[tag,setTag]=React.useState("");
+
+    // const[gif,setGif]=React.useState("");
+    // const[loading,setloading]=React.useState(false);
+   
+    // const url='https://api.giphy.com/v1/gifs/random?api_key=kXYaX7wCACsfNka4VQudYPbSUeQ7V6bp&tag=${encodeURIComponent(tag)}';
      
-    async function fetchdata()
-    {
-        setloading(true);
-        const output=await axios.get(url);
-        console.log(output);
-        setGif(output.data.data.images.original.url);
-        setloading(false);
+    // async function fetchdata()
+    // {
+    //     setloading(true);
+    //     const output=await axios.get(url);
+    //     console.log(output);
+    //     setGif(output.data.data.images.original.url);
+    //     setloading(false);
+    // }
+    //   function clickhandler()
+    // {
+    //    fetchdata();
+    // }
+    // React.useEffect(()=>
+    // {
+    //     fetchdata();
+    // },[])
+    const{gif,loading,fetchData}=useGif();
+    function changehandler(e) {
+      setTag(e.target.value);
     }
-      function clickhandler()
-    {
-       fetchdata();
+
+    function clickhandler() {
+      fetchData(tag);
     }
-    React.useEffect(()=>
-    {
-        fetchdata();
-    },[])
-  function changehandler(e)
-  {
-     setTag(e.target.value);
-  }
 
     return(
      <section className="w-full overflow-hidden rounded-2xl border border-blue-700/20 bg-blue-500 p-4 shadow-xl shadow-blue-900/15 sm:p-6">
@@ -46,4 +52,4 @@ const Tag=()=>
 }
 export default Tag;
 // output.data.data.images.original.url is path to fetch the particular gif in console
-//the code written above the return must be less so we must use the custom hooks for that
+//the code written above the return must be less so we must use the custom hooks for the code
